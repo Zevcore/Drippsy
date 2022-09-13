@@ -45,16 +45,16 @@ services:
     networks:
       -   api
 
-#  nextjs:
-#    build:
-#        context: client
-#        dockerfile: docker/node/Dockerfile
-#    networks:
-#        - client
-#    volumes:
-#      - ./client:/var/www/client
-#    ports:
-#      - "3000:3000"
+  nextjs:
+    build:
+        context: client
+        dockerfile: docker/node/Dockerfile
+    networks:
+        - client
+    volumes:
+      - ./client:/var/www/client
+    ports:
+      - "3000:3000"
 
 networks:
   api:
