@@ -19,10 +19,16 @@ services:
     build:
       context: api
       dockerfile: docker/php-fpm/Dockerfile
+    environment:
+      - XDEBUG_CONFIG=remote_host=192.168.65.0
+      - PHP_IDE_CONFIG=serverName=docker-server
     volumes:
       - ./api:/var/www/api
+      - ./api/docker/php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     depends_on:
       - db
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
       -   api
 
