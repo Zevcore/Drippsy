@@ -2,6 +2,7 @@ version: '3'
 
 services:
   nginx:
+    container_name: drippsy_nginx
     build:
       context: api
       dockerfile: docker/nginx/Dockerfile
@@ -16,6 +17,7 @@ services:
       - api
 
   php:
+    container_name: drippsy_php
     build:
       context: api
       dockerfile: docker/php-fpm/Dockerfile
@@ -33,6 +35,7 @@ services:
       -   api
 
   db:
+    container_name: drippsy_db
     image: mariadb:latest
     restart: always
     environment:
@@ -46,6 +49,7 @@ services:
       -   api
 
   nextjs:
+    container_name: drippsy_front
     build:
         context: client
         dockerfile: docker/node/Dockerfile
