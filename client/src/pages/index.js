@@ -1,7 +1,17 @@
+import LoginForm from "@/components/LoginForm"
+import RegisterForm from "@/components/RegisterForm"
+import IndexLayout from "@/layouts/IndexLayout";
+
 export default function Home() {
-  return (
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-  )
+    return (
+        <IndexLayout>
+            <RegisterForm />
+            <RegisterForm />
+            <RegisterForm />
+            <RegisterForm />
+            <RegisterForm />
+            <RegisterForm />
+            <RegisterForm />
+        </IndexLayout>
+    )
 }
