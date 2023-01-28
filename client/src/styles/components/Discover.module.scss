@@ -1,0 +1,63 @@
+@import '../colors';
+
+div.container {
+  h1.title {
+    padding: 20px 0;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    position: relative;
+    width: 480px;
+    margin: 0 auto;
+    z-index: -1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 20px;
+      right: 0;
+      width: 50px;
+      height: 5px;
+      background-color: $blue;
+      border-radius: 5px;
+      z-index: -1;
+    }
+
+    &:first-letter {
+      color: $blue;
+    }
+  }
+
+  .discover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    a {
+      display: flex;
+      flex-direction: column;
+      margin: 0 50px;
+
+      img {
+        width: 500px;
+        height: 400px;
+        border-radius: 15px 15px 0 0;
+        transition: .2s ease all;
+        filter: grayscale(.8);
+
+        &:hover {
+          filter: grayscale(0);
+        }
+      }
+
+      p {
+        font-size: 2rem;
+        color: black;
+        text-align: left;
+        padding: 10px 0;
+      }
+    }
+  }
+}

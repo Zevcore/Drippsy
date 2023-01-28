@@ -1,0 +1,38 @@
+@import '../colors';
+
+.container {
+  background-color: $green;
+
+  display: flex;
+  margin: 30px 0 0 0;
+  padding: 30px 0;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    max-width: 45vw;
+    margin-right: 50px;
+    h3 {
+      padding: 20px 0;
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1.5rem;
+    }
+  }
+
+  form {
+    border: 1px solid green;
+    padding: 40px 10px;
+    input {
+      height: 40px;
+      background-color: transparent;
+      border: 1px solid green;
+      margin: 0 10px;
+      padding: 0 20px;
+      color: green;
+      border-radius: 10px;
+    }
+  }
+}
