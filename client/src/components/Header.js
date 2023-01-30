@@ -12,12 +12,12 @@ export default function Header() {
                 <div className={styles.auth}>
                     <ul>
                         <li><Link href="/"><a>FAQ</a></Link></li>
-                        <li><Link href="/"><a>Sign up</a></Link></li>
-                        <li><Link href="/"><a>Log in</a></Link></li>
+                        <li><Link href="/register"><a>Sign up</a></Link></li>
+                        <li><Link href="/login"><a>Log in</a></Link></li>
                     </ul>
                 </div>
                 <div className={styles.menu}>
-                    <h1><Link href="">Drippsy</Link></h1>
+                    <h1><Link href="/">Drippsy</Link></h1>
                     <ul>
                         <li><Link href="/"><a>New & featured</a></Link></li>
                         <li><Link href="/"><a>Man</a></Link></li>

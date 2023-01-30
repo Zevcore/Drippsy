@@ -33,6 +33,7 @@ div.container {
     cursor: grab;
     overflow: hidden;
     .inner_carousel {
+      z-index: -1;
       display: flex;
       .item {
         padding: 40px;

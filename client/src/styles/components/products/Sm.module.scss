@@ -56,6 +56,7 @@ div.container {
         }
 
         svg {
+          z-index: -1;
           font-size: 2rem;
           position: absolute;
           right: 15px;
