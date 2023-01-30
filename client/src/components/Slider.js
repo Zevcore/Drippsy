@@ -20,7 +20,7 @@ export default function Slider() {
                     <motion.div className={styles.item}>
                         <Link href="/">
                             <a>
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8&w=1000&q=80"/>
+                                <img src="https://assets.adidas.com/images/w_276,h_276,f_auto,q_auto,fl_lossy,c_fill,g_auto/b7beee7c32d4438aaba3acb6001c2e7b_9366/FY7757_01_standard.jpg"/>
                                 <p>Description</p>
                             </a>
                         </Link>
@@ -28,7 +28,7 @@ export default function Slider() {
                     <motion.div className={styles.item}>
                         <Link href="/">
                             <a>
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8&w=1000&q=80"/>
+                                <img src="https://assets.adidas.com/images/w_276,h_276,f_auto,q_auto,fl_lossy,c_fill,g_auto/b7beee7c32d4438aaba3acb6001c2e7b_9366/FY7757_01_standard.jpg"/>
                                 <p>Description</p>
                             </a>
                         </Link>
@@ -36,7 +36,7 @@ export default function Slider() {
                     <motion.div className={styles.item}>
                         <Link href="/">
                             <a>
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8&w=1000&q=80"/>
+                                <img src="https://assets.adidas.com/images/w_276,h_276,f_auto,q_auto,fl_lossy,c_fill,g_auto/b7beee7c32d4438aaba3acb6001c2e7b_9366/FY7757_01_standard.jpg"/>
                                 <p>Description</p>
                             </a>
                         </Link>
@@ -44,7 +44,7 @@ export default function Slider() {
                     <motion.div className={styles.item}>
                         <Link href="/">
                             <a>
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8&w=1000&q=80"/>
+                                <img src="https://assets.adidas.com/images/w_276,h_276,f_auto,q_auto,fl_lossy,c_fill,g_auto/b7beee7c32d4438aaba3acb6001c2e7b_9366/FY7757_01_standard.jpg"/>
                                 <p>Description</p>
                             </a>
                         </Link>
@@ -52,7 +52,31 @@ export default function Slider() {
                     <motion.div className={styles.item}>
                         <Link href="/">
                             <a>
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8&w=1000&q=80"/>
+                                <img src="https://assets.adidas.com/images/w_276,h_276,f_auto,q_auto,fl_lossy,c_fill,g_auto/b7beee7c32d4438aaba3acb6001c2e7b_9366/FY7757_01_standard.jpg"/>
+                                <p>Description</p>
+                            </a>
+                        </Link>
+                    </motion.div>
+                    <motion.div className={styles.item}>
+                        <Link href="/">
+                            <a>
+                                <img src="https://assets.adidas.com/images/w_276,h_276,f_auto,q_auto,fl_lossy,c_fill,g_auto/b7beee7c32d4438aaba3acb6001c2e7b_9366/FY7757_01_standard.jpg"/>
+                                <p>Description</p>
+                            </a>
+                        </Link>
+                    </motion.div>
+                    <motion.div className={styles.item}>
+                        <Link href="/">
+                            <a>
+                                <img src="https://assets.adidas.com/images/w_276,h_276,f_auto,q_auto,fl_lossy,c_fill,g_auto/b7beee7c32d4438aaba3acb6001c2e7b_9366/FY7757_01_standard.jpg"/>
+                                <p>Description</p>
+                            </a>
+                        </Link>
+                    </motion.div>
+                    <motion.div className={styles.item}>
+                        <Link href="/">
+                            <a>
+                                <img src="https://assets.adidas.com/images/w_276,h_276,f_auto,q_auto,fl_lossy,c_fill,g_auto/b7beee7c32d4438aaba3acb6001c2e7b_9366/FY7757_01_standard.jpg"/>
                                 <p>Description</p>
                             </a>
                         </Link>

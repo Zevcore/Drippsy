@@ -21,8 +21,8 @@ export default function Home() {
             </main>
 
             <Slider />
-            <Discover />
             <Sm />
+            <Discover />
             <Newsletter />
             <Footer />
         </IndexLayout>
