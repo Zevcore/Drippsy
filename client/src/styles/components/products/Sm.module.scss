@@ -1,6 +1,7 @@
 @import '../../colors';
 
 div.container {
+  max-width: 100%;
   h1.title {
     padding: 20px 0;
     font-size: 3rem;
@@ -8,7 +9,7 @@ div.container {
     letter-spacing: 1px;
     text-align: center;
     position: relative;
-    width: 80px;
+    width: 195px;
     margin: 0 auto;
     z-index: -1;
 
@@ -30,65 +31,84 @@ div.container {
   }
 
   .products {
+    margin: 0 30px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 
     .product {
-      margin: 30px 50px;
+      padding: 20px 10px;
+      margin: 0 5px;
+      max-width: 25%;
+      transition: .3s ease all;
 
       .thumbnail {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-
         img {
-          margin-top: -10px;
-          z-index: -1;
-
-          width: 350px;
-          height: 350px;
-          -webkit-box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
-          -moz-box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
-          box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
-          border-radius: 10px;
+          width: 100%;
         }
+      }
+      .product_title {
+        font-size: 2.2rem;
+        color: $blue;
+      }
 
-        svg {
-          z-index: -1;
-          font-size: 2rem;
-          position: absolute;
-          right: 15px;
-          top: 5px;
+      .price {
+        font-size: 1.8rem;
+      }
+
+      .actions {
+        visibility: hidden;
+      }
+
+      .name {
+        font-size: 1.3rem;
+        color: $dark-gray;
+      }
+
+      .actions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+        margin: 10px 0;
+
+        a {
+          width: 50%;
+          text-align: center;
+          font-size: 1.5rem;
+          padding: 5px 0;
+          color: white;
+          background-color: $dark-gray;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           transition: .2s ease all;
+
+          svg {
+            font-size: 1.5rem;
+            margin: 0 5px;
+          }
+
+          &:first-child {
+            margin: 0 5px 0 0;
+            background-color: $blue;
+          }
+
           &:hover {
-            transform: scale(1.5);
+            transform: scale(0.9);
           }
         }
       }
 
-      .price {
-        margin: -52px 10px 0 0;
-        margin-top: -52px;
-        font-size: 4rem;
-        color: $blue;
-        text-align: right;
-      }
+      &:hover {
+        box-shadow: 0px 0px 0px 1px $lighter-gray;
 
-      a {
-        color: $dark-blue;
-        .product_title {
-          margin: 10px 0 0 0;
-          font-weight: bold;
-          font-size: 2rem;
+        .actions {
+          visibility: visible;
         }
-      }
-
-      span {
-        color: $dark-blue;
-        font-size: 1.8rem;
-        font-weight: lighter;
       }
     }
   }
