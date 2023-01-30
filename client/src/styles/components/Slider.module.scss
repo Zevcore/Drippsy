@@ -1,0 +1,61 @@
+@import '../colors';
+
+div.container {
+  h1.title {
+    padding: 20px 0;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+    z-index: -1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      width: 50px;
+      height: 5px;
+      background-color: $blue;
+      border-radius: 5px;
+      z-index: -1;
+    }
+
+    &:first-letter {
+      color: $blue;
+    }
+  }
+  .carousel {
+    z-index: -1;
+    cursor: grab;
+    overflow: hidden;
+    .inner_carousel {
+      z-index: -1;
+      display: flex;
+      .item {
+        padding: 40px;
+        pointer-events: none;
+        width: 100%;
+
+        a {
+          display: block;
+          img {
+            width: 350px;
+            height: 400px;
+            margin: 0 20px;
+          }
+          p {
+            text-align: center;
+            color: $dark-gray;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}

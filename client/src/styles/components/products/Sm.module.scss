@@ -1,0 +1,95 @@
+@import '../../colors';
+
+div.container {
+  h1.title {
+    padding: 20px 0;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    position: relative;
+    width: 80px;
+    margin: 0 auto;
+    z-index: -1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 20px;
+      right: 0;
+      width: 50px;
+      height: 5px;
+      background-color: $blue;
+      border-radius: 5px;
+      z-index: -1;
+    }
+
+    &:first-letter {
+      color: $blue;
+    }
+  }
+
+  .products {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .product {
+      margin: 30px 50px;
+
+      .thumbnail {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        img {
+          margin-top: -10px;
+          z-index: -1;
+
+          width: 350px;
+          height: 350px;
+          -webkit-box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
+          -moz-box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
+          box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
+          border-radius: 10px;
+        }
+
+        svg {
+          z-index: -1;
+          font-size: 2rem;
+          position: absolute;
+          right: 15px;
+          top: 5px;
+          transition: .2s ease all;
+          &:hover {
+            transform: scale(1.5);
+          }
+        }
+      }
+
+      .price {
+        margin: -52px 10px 0 0;
+        margin-top: -52px;
+        font-size: 4rem;
+        color: $blue;
+        text-align: right;
+      }
+
+      a {
+        color: $dark-blue;
+        .product_title {
+          margin: 10px 0 0 0;
+          font-weight: bold;
+          font-size: 2rem;
+        }
+      }
+
+      span {
+        color: $dark-blue;
+        font-size: 1.8rem;
+        font-weight: lighter;
+      }
+    }
+  }
+}
