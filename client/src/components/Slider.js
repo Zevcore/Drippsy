@@ -15,7 +15,7 @@ export default function Slider() {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Last added</h1>
-            <motion.div ref={carousel} className={styles.carousel}>
+            <motion.div refs={carousel} className={styles.carousel}>
                 <motion.div drag="x" dragConstraints={{right: 0, left: -width}} className={styles.inner_carousel}>
                     <motion.div className={styles.item}>
                         <Link href="/">

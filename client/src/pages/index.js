@@ -1,12 +1,8 @@
-import LoginForm from "@/components/LoginForm"
-import RegisterForm from "@/components/RegisterForm"
 import IndexLayout from "@/layouts/IndexLayout";
 import styles from "@/styles/components/Index.module.scss"
 import Link from 'next/link'
 import Slider from "@/components/Slider";
 import Discover from "@/components/Discover";
-import Newsletter from "@/components/Newsletter";
-import Footer from "@/components/Footer";
 import Sm from "@/components/products/Sm";
 
 export default function Home() {
@@ -23,8 +19,6 @@ export default function Home() {
             <Slider />
             <Sm />
             <Discover />
-            <Newsletter />
-            <Footer />
         </IndexLayout>
     )
 }

@@ -70,7 +70,7 @@ class AuthController extends AbstractController
         
         // Check if user exists
         if($user === null) {
-            $message = sprintf("User with email %s does not exist!", $userData['email']);
+            $message = sprintf("User with email %s does not exist!", $request->get('email'));
             
             return $this->json([
                 'message' => $message,

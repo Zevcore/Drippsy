@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 export default function Register() {
     return (
         <IndexLayout>
-
             <RegisterForm />
             <Newsletter />
             <Footer />
