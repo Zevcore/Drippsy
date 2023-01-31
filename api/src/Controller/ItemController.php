@@ -18,27 +18,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class ItemController extends AbstractController
 {
     #[Route('/api/item/create', name: 'app_item_create', methods: ['POST'])]
-    public function create(Request $request, ManagerRegistry $doctrine, UserRepository $userRepository): JsonResponse
+    public function create(Request $request, ItemRepository $itemRepository, UserRepository $userRepository): JsonResponse
     {
-        $entityManager = $doctrine->getManager();
-
-        $item = new Item();
-        $item->setName($request->get('name'));
-        $item->setDescription($request->get('description'));
-        $item->setPrice($request->get('price'));
-        $item->setCategory(Categories::getCategory($request->get("category")));
-        $item->setState(State::getState($request->get("state")));
-        $item->setQuantity($request->get('quantity'));
-        $item->setVisibility(true);
-        $item->setSize($request->get('size'));
-        $item->setColor($request->get('color'));
-        $item->setBrand($request->get('brand'));
-        $item->setType($request->get('type'));
-        $item->setThumbnails([]);
-        $item->setOwner($userRepository->findOneBy(['email' => $request->get("owner")]));
-
-        $entityManager->persist($item);
-        $entityManager->flush();
+        $itemRepository->createEntity([
+            'name' => $request->get('name'),
+            'description' => $request->get("description"),
+            'price' => $request->get('price'),
+            'category' => Categories::getCategory($request->get("category")),
+            'state' => State::getState($request->get("state")),
+            'quantity' => $request->get('quantity'),
+            'visibility' => true,
+            'size' => $request->get('size'),
+            'color' => $request->get('color'),
+            'brand' => $request->get('brand'),
+            'type' => $request->get('type'),
+            'thumbnails' => [],
+            'owner' => $userRepository->findOneBy(['email' => $request->get("owner")]),
+        ]);
 
         return $this->json([
             'message' => 'Item added successfully!',
@@ -47,20 +43,77 @@ class ItemController extends AbstractController
     }
 
     #[Route('/api/item/update', name: 'app_item_update', methods: ['POST'])]
-    public function update(Request $request): JsonResponse
+    public function update(Request $request, ItemRepository $itemRepository): JsonResponse
     {
+        $id = $request->get('id');
+        if($itemRepository->updateEntity($id, $request->request->all())) {
+            return $this->json([
+                'message' => 'Item updated successfully!',
+                'code' => Response::HTTP_ACCEPTED,
+            ]);
+        }
+
+        return $this->json([
+            'message' => 'Item can not be updated!',
+            'code' => Response::HTTP_NOT_MODIFIED,
+        ]);
 
     }
 
     #[Route('/api/item/delete', name: 'app_item_delete', methods: ['POST'])]
-    public function delete(Request $request): JsonResponse
+    public function delete(Request $request, ItemRepository $itemRepository): JsonResponse
     {
+        $item = $itemRepository->findOneBy(['id' => $request->get('id')]);
+        if($item) {
+            $itemRepository->remove($item, true);
 
+            return $this->json([
+                'message' => 'Item has been deleted!',
+                'code' => Response::HTTP_ACCEPTED,
+            ]);
+        }
+
+        return $this->json([
+            'message' => 'Item do not exist!',
+            'code' => Response::HTTP_NOT_FOUND,
+        ]);
     }
 
     #[Route('/api/item/show', name: 'app_item_show', methods: ['POST'])]
-    public function show(Request $request): JsonResponse
+    public function show(Request $request, ItemRepository $itemRepository): JsonResponse
     {
+        $item = $itemRepository->findOneBy(['id' => $request->get('id')]);
 
+        if($item) {
+            return $this->json([
+                'item' => $item->getAll(),
+                'code' => Response::HTTP_FOUND,
+            ]);
+        }
+
+        return $this->json([
+            'message' => 'Item do not exist!',
+            'code' => Response::HTTP_NOT_FOUND,
+        ]);
+    }
+
+    #[Route('/api/item/showByIds', name: 'app_item_showByIds', methods: ['POST'])]
+    public function showByIds(Request $request, ItemRepository $itemRepository): JsonResponse
+    {
+        if($request->get('amount')) {
+            //$item = $itemRepository->findOneBy(['id' => $request->get('id')]);
+
+            dd($itemRepository->findById('1'));
+
+            return $this->json([
+                'item' => $item->getAll(),
+                'code' => Response::HTTP_FOUND,
+            ]);
+        }
+
+        return $this->json([
+            'message' => 'Item do not exist!',
+            'code' => Response::HTTP_NOT_FOUND,
+        ]);
     }
 }

@@ -39,6 +39,39 @@ class ItemRepository extends ServiceEntityRepository
         }
     }
 
+    public function createEntity(array $entity): bool
+    {
+        $item = new Item();
+
+        $item->setAll($entity);
+        $this->getEntityManager()->persist($item);
+        $this->getEntityManager()->flush();
+    }
+
+    public function updateEntity(string $id, array $entity): bool
+    {
+        $item = $this->findOneBy(['id' => $id]);
+
+        if($item) {
+            $item->setAll($entity);
+            $this->getEntityManager()->persist($item);
+            $this->getEntityManager()->flush();
+
+            return true;
+        }
+        return false;
+    }
+
+    public function findById(string $id): array
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.id = :id')
+            ->setParameter('id', $id)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Item[] Returns an array of Item objects
 //     */

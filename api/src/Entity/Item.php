@@ -6,6 +6,7 @@ use App\Enums\Categories;
 use App\Enums\State;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[ORM\Entity(repositoryClass: ItemRepository::class)]
 class Item
@@ -225,4 +226,34 @@ class Item
 
         return $this;
     }
+
+    public function setAll(array $entity): Item
+    {
+        $this->setName( $entity['name'] ?? $this->getName());
+        $this->setDescription($entity['description'] ?? $this->getDescription());
+        $this->setCategory($entity['category'] ?? $this->getCategory());
+        $this->setState($entity['state'] ?? $this->getState());
+        $this->setQuantity($entity['quantity'] ?? $this->getQuantity());
+        $this->setVisibility($entity['visibility'] ?? $this->isVisibility());
+        $this->setSize($entity['size'] ??  $this->getSize());
+        $this->setColor($entity['color'] ?? $this->getColor());
+        $this->setBrand($entity['brand'] ?? $this->getBrand());
+        $this->setType($entity['type'] ?? $this->getType());
+        $this->setThumbnails($entity['thumbnails'] ?? $this->getThumbnails());
+
+        return $this;
+    }
+
+    public function getAll(): array
+    {
+        $arr = [];
+
+        foreach($this as $key => $item) {
+            $arr[$key] = $item;
+        }
+
+        return $arr;
+    }
+
+
 }
