@@ -7,8 +7,6 @@ export default function Register() {
     return (
         <IndexLayout>
             <RegisterForm />
-            <Newsletter />
-            <Footer />
         </IndexLayout>
     )
 }

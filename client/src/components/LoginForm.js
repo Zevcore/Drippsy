@@ -1,14 +1,19 @@
 import styles from "@/styles/forms/Login.module.scss"
-import {loginUser} from "@/libs/actions/login"
-import {useState} from "react"
+import { loginUser } from "@/libs/auth/actions"
+import {validateLoginFormData, validateLoginFormResponse} from "@/libs/auth/validators"
+import {useEffect, useRef, useState} from "react"
 import { useRouter } from 'next/router'
-import Cookies from 'js-cookie'
 
 export default function LoginForm() {
 
     const router = useRouter();
+    const [response, setResponse] = useState(null);
+    const [errorDiv, setErrorDiv] = useState(null);
+    let errorMessage = useRef();
 
-    const [data, setData] = useState(null);
+    useEffect(() => {
+        setErrorDiv(errorMessage.current);
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,24 +22,23 @@ export default function LoginForm() {
         data.append('email', e.target.email.value);
         data.append('password', e.target.password.value);
 
-        let res = loginUser(data);
-        res.then(data => setData(data));
-
-        validateData();
-    };
-
-    const validateData = () => {
-        let error = document.querySelector(".error");
-        if(data) {
-            if(data.code === 200) {
-                Cookies.set("X-API-TOKEN", data.token, {expires: 30})
-                router.push("/");
-            }
-            else {
-                error.innerHTML = data.message;
-            }
+        if(validateLoginFormData(data).length !== 0) {
+            errorDiv.innerHTML = validateLoginFormData(data).join("<br>");
+            return;
         }
-    }
+
+        let res = loginUser(data);
+        res.then(data => setResponse(data));
+
+        switch(validateLoginFormResponse(response)) {
+            case true:
+                router.push("/");
+                break;
+            case false:
+                errorDiv.innerHTML = response.message;
+                break;
+        }
+    };
 
     return (
         <div className={styles.container}>
@@ -43,13 +47,13 @@ export default function LoginForm() {
                 <hr/>
                 <div className={styles.element}>
                     <label htmlFor="email">Email address</label>
-                    <input type="email" id="email" />
+                    <input type="email" id="email"/>
                 </div>
                 <div className={styles.element}>
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" />
+                    <input type="password" id="password"/>
                 </div>
-                <p className="error"></p>
+                <p ref={errorMessage} className={styles.error}></p>
                 <input type="submit" value="Login"/>
             </form>
         </div>

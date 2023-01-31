@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
 
 class AuthController extends AbstractController
 {
@@ -24,11 +23,14 @@ class AuthController extends AbstractController
      * @throws Exception
      */
     #[Route('/api/auth/register', name: 'app_auth_register', methods: ['POST'])]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine): JsonResponse
+    public function register(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine): JsonResponse
     {
-        // TODO: 
-        // - check if user already exists
-        // - validate request
+        if($userRepository->findOneBy(['email' => $request->get('email')])) {
+            return $this->json([
+                'message' => sprintf('User with email %s already exists!', $request->get('email')),
+                'code' => Response::HTTP_CONFLICT
+            ]);
+        }
         
         $entityManager = $doctrine->getManager();
         $user = new User();
@@ -45,9 +47,13 @@ class AuthController extends AbstractController
 
         $entityManager->persist($user);
         $entityManager->flush();
+
+        $token = $this->generateToken($user);
         
         return $this->json([
             'message' => 'User added successfully!',
+            'token' => $token->getToken(),
+            'user' => $this->prepareUserDataToResponse($user),
             'code' => Response::HTTP_CREATED
         ]);
     }
@@ -106,6 +112,7 @@ class AuthController extends AbstractController
 
         return $this->json([
             'token' => $token->getToken(),
+            'user' => $this->prepareUserDataToResponse($user),
             'code' => Response::HTTP_OK
         ]);
     }
@@ -121,12 +128,21 @@ class AuthController extends AbstractController
     /**
      * @throws Exception
      */
-    protected function generateToken(User $user)
+    protected function generateToken(User $user): ApiToken
     {
         $token = new ApiToken();
         $token->setUser($user);
         $token->setToken(base64_encode($user->getEmail() . bin2hex(random_bytes(20))));
         
         return $token;
+    }
+
+    protected function prepareUserDataToResponse(User $user): array
+    {
+        return [
+            "email" => $user->getEmail(),
+            "name" => $user->getFirstname(),
+            "surname" => $user->getLastname(),
+        ];
     }
 }

@@ -7,8 +7,6 @@ export default function Login() {
     return (
         <IndexLayout>
             <LoginForm />
-            <Newsletter />
-            <Footer />
         </IndexLayout>
     )
 }
