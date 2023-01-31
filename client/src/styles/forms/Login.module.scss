@@ -3,6 +3,12 @@
   width: 100%;
 
   form {
+    .error {
+      padding: 5px 0;
+      color:red;
+      font-size: 1.6rem;
+    }
+
     display: flex;
     flex-direction: column;
     justify-content: center;

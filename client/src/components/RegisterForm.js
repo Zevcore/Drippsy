@@ -1,12 +1,19 @@
 import styles from "@/styles/forms/Register.module.scss"
-import {registerUser} from "@/libs/actions/register"
+import {registerUser} from "@/libs/auth/actions"
 import {useRouter} from "next/router";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import { validateRegisterFormData } from "@/libs/auth/validators";
 
 export default function RegisterForm() {
 
     const router = useRouter();
     const [response, setResponse] = useState(null);
+    const [errorDiv, setErrorDiv] = useState(null);
+    let errorMessage = useRef();
+
+    useEffect(() => {
+        setErrorDiv(errorMessage.current);
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,19 +29,22 @@ export default function RegisterForm() {
         data.append('city', e.target.city.value);
         data.append('postal_code', e.target.postal_code.value);
 
+        if(validateRegisterFormData(data).length !== 0) {
+            errorDiv.innerHTML = validateRegisterFormData(data).join("<br>");
+            return;
+        }
+
         let res = registerUser(data);
         res.then(data => setResponse(data));
 
-        validateResponse();
-    }
-
-    const validateResponse = () => {
-        let error = document.querySelector(".error");
-        if(response.code !== 201) {
-            document.querySelector(".error").innerHTML = response.message;
-        }
-        else {
-            router.push("/");
+        switch(validateRegisterFormResponse(response)) {
+            case true:
+                router.push("/");
+                break;
+            case false:
+                let error = document.querySelector(".error");
+                error.innerHTML = response.message;
+                break;
         }
     }
 
@@ -85,7 +95,7 @@ export default function RegisterForm() {
                         <input type="text" className="form-control" id="postal_code" />
                     </div>
                 </div>
-                <p className="error"></p>
+                <p ref={errorMessage} className={styles.error}></p>
                 <input type="submit" className="btn btn-success w-50" value="Sing up" />
             </form>
         </div>

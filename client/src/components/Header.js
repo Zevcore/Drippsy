@@ -5,7 +5,6 @@ import {BiSearchAlt} from "react-icons/bi";
 import {GrFavorite} from "react-icons/gr";
 
 export default function Header() {
-
     return (
         <header className={styles.header}>
             <nav className={styles.nav}>

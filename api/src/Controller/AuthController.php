@@ -25,7 +25,6 @@ class AuthController extends AbstractController
     #[Route('/api/auth/register', name: 'app_auth_register', methods: ['POST'])]
     public function register(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine): JsonResponse
     {
-        // Check if user exists
         if($userRepository->findOneBy(['email' => $request->get('email')])) {
             return $this->json([
                 'message' => sprintf('User with email %s already exists!', $request->get('email')),
@@ -48,9 +47,13 @@ class AuthController extends AbstractController
 
         $entityManager->persist($user);
         $entityManager->flush();
+
+        $token = $this->generateToken($user);
         
         return $this->json([
             'message' => 'User added successfully!',
+            'token' => $token->getToken(),
+            'user' => $this->prepareUserDataToResponse($user),
             'code' => Response::HTTP_CREATED
         ]);
     }
@@ -109,6 +112,7 @@ class AuthController extends AbstractController
 
         return $this->json([
             'token' => $token->getToken(),
+            'user' => $this->prepareUserDataToResponse($user),
             'code' => Response::HTTP_OK
         ]);
     }
@@ -124,12 +128,21 @@ class AuthController extends AbstractController
     /**
      * @throws Exception
      */
-    protected function generateToken(User $user)
+    protected function generateToken(User $user): ApiToken
     {
         $token = new ApiToken();
         $token->setUser($user);
         $token->setToken(base64_encode($user->getEmail() . bin2hex(random_bytes(20))));
         
         return $token;
+    }
+
+    protected function prepareUserDataToResponse(User $user): array
+    {
+        return [
+            "email" => $user->getEmail(),
+            "name" => $user->getFirstname(),
+            "surname" => $user->getLastname(),
+        ];
     }
 }
