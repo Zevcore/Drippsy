@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
 
 class AuthController extends AbstractController
 {
@@ -24,11 +23,15 @@ class AuthController extends AbstractController
      * @throws Exception
      */
     #[Route('/api/auth/register', name: 'app_auth_register', methods: ['POST'])]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine): JsonResponse
+    public function register(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine): JsonResponse
     {
-        // TODO: 
-        // - check if user already exists
-        // - validate request
+        // Check if user exists
+        if($userRepository->findOneBy(['email' => $request->get('email')])) {
+            return $this->json([
+                'message' => sprintf('User with email %s already exists!', $request->get('email')),
+                'code' => Response::HTTP_CONFLICT
+            ]);
+        }
         
         $entityManager = $doctrine->getManager();
         $user = new User();

@@ -1,9 +1,46 @@
 import styles from "@/styles/forms/Register.module.scss"
+import {registerUser} from "@/libs/actions/register"
+import {useRouter} from "next/router";
+import {useState} from "react";
 
 export default function RegisterForm() {
+
+    const router = useRouter();
+    const [response, setResponse] = useState(null);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const data = new FormData();
+        data.append('email', e.target.email.value);
+        data.append('password', e.target.password.value);
+        data.append('firstname', e.target.name.value);
+        data.append('lastname', e.target.surname.value);
+        data.append('date_of_birth', e.target.date.value);
+        data.append('street', e.target.street.value);
+        data.append('street_number', e.target.street_number.value);
+        data.append('city', e.target.city.value);
+        data.append('postal_code', e.target.postal_code.value);
+
+        let res = registerUser(data);
+        res.then(data => setResponse(data));
+
+        validateResponse();
+    }
+
+    const validateResponse = () => {
+        let error = document.querySelector(".error");
+        if(response.code !== 201) {
+            document.querySelector(".error").innerHTML = response.message;
+        }
+        else {
+            router.push("/");
+        }
+    }
+
     return (
         <div className={styles.container}>
-            <form className="container w-50 border p-5">
+            <form onSubmit={handleSubmit} className="container w-50 border p-5">
                 <h1>[ register ]</h1>
                 <hr/>
                 <div className={styles.element}>
@@ -48,6 +85,7 @@ export default function RegisterForm() {
                         <input type="text" className="form-control" id="postal_code" />
                     </div>
                 </div>
+                <p className="error"></p>
                 <input type="submit" className="btn btn-success w-50" value="Sing up" />
             </form>
         </div>
