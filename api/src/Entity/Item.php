@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Enums\Categories;
+use App\Enums\State;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,10 +25,10 @@ class Item
     private ?string $price = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $category = null;
+    private ?Categories $category = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $state = null;
+    private ?State $state = null;
 
     #[ORM\Column(length: 255)]
     private ?string $quantity = null;
@@ -94,29 +96,39 @@ class Item
         return $this;
     }
 
-    public function getCategory(): ?string
+    /**
+     * @return Categories|null
+     */
+    public function getCategory(): ?Categories
     {
         return $this->category;
     }
 
-    public function setCategory(string $category): self
+    /**
+     * @param Categories|null $category
+     */
+    public function setCategory(?Categories $category): void
     {
         $this->category = $category;
-
-        return $this;
     }
 
-    public function getState(): ?string
+    /**
+     * @return State|null
+     */
+    public function getState(): ?State
     {
         return $this->state;
     }
 
-    public function setState(string $state): self
+    /**
+     * @param State|null $state
+     */
+    public function setState(?State $state): void
     {
         $this->state = $state;
-
-        return $this;
     }
+
+
 
     public function getQuantity(): ?string
     {
