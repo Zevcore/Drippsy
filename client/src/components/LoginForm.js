@@ -1,10 +1,12 @@
 import styles from "@/styles/forms/Login.module.scss"
 import {loginUser} from "@/libs/actions/login"
-import {useState} from "react";
-import {redirect} from "next/dist/server/api-utils";
-import { useRouter } from "next/router";
+import {useState} from "react"
+import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 
 export default function LoginForm() {
+
+    const router = useRouter();
 
     const [data, setData] = useState(null);
 
@@ -25,9 +27,8 @@ export default function LoginForm() {
         let error = document.querySelector(".error");
         if(data) {
             if(data.code === 200) {
-                // save token
-                // redirect to ap
-                console.log(data.token);
+                Cookies.set("X-API-TOKEN", data.token, {expires: 30})
+                router.push("/");
             }
             else {
                 error.innerHTML = data.message;
