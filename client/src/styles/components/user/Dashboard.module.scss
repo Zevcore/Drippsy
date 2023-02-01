@@ -1,0 +1,80 @@
+@import '../../colors';
+
+.container {
+  width: 80%;
+  margin: 50px auto;
+
+  .welcome, .welcome span {
+    font-size: 3rem;
+  }
+
+  .welcome {
+    span {
+      color: $blue;
+    }
+  }
+
+  .actions {
+    margin: 20px 0;
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+
+      li {
+        padding: 20px 40px;
+        background-color: $blue;
+        border-radius: 10px;
+        margin: 0 10px;
+        color: white;
+        transition: .3s ease all;
+
+        p {
+          font-size: 1.6rem;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: $dark-blue;
+          box-shadow: 0 0 5px 0 $gray;
+        }
+      }
+    }
+  }
+
+  .account {
+    width: 100%;
+    margin: 50px 0;
+    .wrapper {
+      display: flex;
+      .element {
+        width: 50%;
+
+        &:first-child {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .element {
+      margin: 10px 0;
+      padding: 20px;
+      width: 100%;
+      background-color: $lighter-gray;
+      border-radius: 10px;
+      span {
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 10px 0;
+        color: $blue;
+        font-size: 1.5rem;
+      }
+
+      p {
+        padding: 5px 0;
+        font-size: 1.8rem;
+      }
+    }
+  }
+}

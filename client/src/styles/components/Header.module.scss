@@ -1,9 +1,9 @@
 @import '../colors';
 
 .header {
-  z-index: 999;
   width: 100%;
   .nav {
+    z-index: 999;
     width: 100%;
     position: fixed;
 
@@ -22,6 +22,32 @@
         align-items: center;
         list-style: none;
         padding: 0 30px 0 0;
+        div {
+          display: flex;
+          align-items: center;
+          li {
+            p {
+              font-size: 1.4rem;
+              span {
+                font-weight: bold;
+                font-size: 1.4rem;
+                color: $blue;
+              }
+            }
+
+            svg {
+              font-size: 2rem;
+              color: $blue;
+              margin: auto;
+              transition: .3s ease all;
+
+              &:hover {
+                transform: rotate(90deg);
+                cursor: pointer;
+              }
+            }
+          }
+        }
         li {
           padding: 0 7px;
           a {
