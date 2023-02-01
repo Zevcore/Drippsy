@@ -121,19 +121,10 @@ class ItemController extends AbstractController
     {
         $count = $request->get('count');
         if($count) {
-            $items = $itemRepository->findRecentlyAdded((int) $count);
-
-            $returnMessage = [
+            return $this->json([
+                'items' => $itemRepository->findRecentlyAdded((int) $count),
                 'code' => Response::HTTP_FOUND,
-            ];
-
-            foreach($items as $key => $item) {
-                $returnMessage['items'][] = [
-                    $key => $item,
-                ];
-            }
-
-            return $this->json($returnMessage);
+            ]);
         }
 
         return $this->json([

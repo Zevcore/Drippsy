@@ -1,0 +1,154 @@
+@import '../../colors';
+
+.container {
+  width: 80%;
+  margin: 40px auto;
+  padding: 0 20px 40px 20px;
+  box-shadow: 0px 1px 5px 0px $lighter-gray;
+  border-radius: 5px;
+
+  h3 {
+    color: $dark-gray;
+    font-size: 1.5rem;
+    padding: 20px 0;
+    font-weight: lighter;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    .gallery {
+      width: 50%;
+      margin-right: 30px;
+
+      img {
+        width: 150px;
+        margin: 0 5px;
+      }
+
+      img:first-child {
+        width: 100%;
+      }
+
+    }
+
+    .product {
+      width: 50%;
+
+      .title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        h1 {
+          font-size: 2.2rem;
+          font-weight: lighter;
+        }
+
+        h2 {
+          font-size: 1.8rem;
+          font-weight: bold;
+        }
+      }
+
+      .reviews {
+        display: flex;
+        align-items: center;
+        padding: 15px 0;
+        p {
+          font-size: 1.8rem;
+          margin: 0 10px 0 0;
+        }
+
+        svg {
+          color: gold;
+          font-size: 1.6rem;
+        }
+      }
+
+      .colors {
+        p {
+          text-transform: uppercase;
+          font-size: 1rem;
+          letter-spacing: 1px;
+        }
+        .box {
+          display: flex;
+          flex-direction: row;
+          .color {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: $gray;
+            margin: 10px 20px;
+            border: 1px solid $dark-gray;
+
+            &:first-child {
+              margin: 10px 0 0 0;
+            }
+          }
+        }
+      }
+
+      .size {
+        p {
+          text-transform: uppercase;
+          font-size: 1rem;
+          letter-spacing: 1px;
+        }
+        .box {
+          display: flex;
+          flex-direction: row;
+          margin: 10px 0;
+
+          .size {
+            background-color: transparent;
+            border: 1px solid $gray;
+            border-radius: 5px;
+            padding: 20px 30px;
+            margin-right: 20px;
+            transition: .3s ease all;
+            font-size: 2.2rem;
+            color: $gray;
+
+            &:hover {
+              background-color: $blue;
+              border: 1px solid $dark-blue;
+              color: white;
+              cursor: pointer;
+            }
+          }
+
+        }
+      }
+      .add {
+        width: 100%;
+        height: 40px;
+        background-color: $blue;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.8rem;
+        color: white;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+
+      .description {
+        span {
+          text-transform: uppercase;
+          font-size: 1rem;
+          letter-spacing: 1px;
+        }
+
+        p {
+          margin: 5px 0;
+          font-size: 1.6rem;
+          text-align: justify;
+        }
+      }
+    }
+  }
+}

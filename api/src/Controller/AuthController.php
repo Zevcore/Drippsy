@@ -141,8 +141,13 @@ class AuthController extends AbstractController
     {
         return [
             "email" => $user->getEmail(),
-            "name" => $user->getFirstname(),
-            "surname" => $user->getLastname(),
+            "firstname" => $user->getFirstname(),
+            "lastname" => $user->getLastname(),
+            "date_of_birth" => $user->getDateOfBirth(),
+            "street" => $user->getStreet(),
+            'number' => $user->getStreetNumber(),
+            'city' => $user->getCity(),
+            'postal_code' => $user->getPostalCode()
         ];
     }
 }

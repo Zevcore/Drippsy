@@ -73,5 +73,5 @@ export const validateRegisterFormResponse = (response) => {
 
 export const saveUser = (token, user) => {
     Cookies.set("X-API-TOKEN", token, {expires: 30});
-    Cookies.set("user", user)
+    Cookies.set("user", JSON.stringify(user))
 }
