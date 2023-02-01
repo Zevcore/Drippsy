@@ -56,6 +56,12 @@ class Item
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updated_at = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -229,8 +235,10 @@ class Item
 
     public function setAll(array $entity): Item
     {
+
         $this->setName( $entity['name'] ?? $this->getName());
         $this->setDescription($entity['description'] ?? $this->getDescription());
+        $this->setPrice($entity['price'] ?? $this->getPrice());
         $this->setCategory($entity['category'] ?? $this->getCategory());
         $this->setState($entity['state'] ?? $this->getState());
         $this->setQuantity($entity['quantity'] ?? $this->getQuantity());
@@ -240,6 +248,9 @@ class Item
         $this->setBrand($entity['brand'] ?? $this->getBrand());
         $this->setType($entity['type'] ?? $this->getType());
         $this->setThumbnails($entity['thumbnails'] ?? $this->getThumbnails());
+        $this->setCreatedAt($entity['created_at'] ?? $this->getCreatedAt());
+        $this->setUpdatedAt($entity['created_at'] ?? $this->getUpdatedAt());
+        $this->setOwner($entity['owner'] ?? $this->getOwner());
 
         return $this;
     }
@@ -253,6 +264,30 @@ class Item
         }
 
         return $arr;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
     }
 
 

@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Item;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,7 +41,7 @@ class ItemRepository extends ServiceEntityRepository
         }
     }
 
-    public function createEntity(array $entity): bool
+    public function createEntity(array $entity)
     {
         $item = new Item();
 
@@ -53,6 +55,7 @@ class ItemRepository extends ServiceEntityRepository
         $item = $this->findOneBy(['id' => $id]);
 
         if($item) {
+            $entity['updated_at'] = new \DateTimeImmutable('now');
             $item->setAll($entity);
             $this->getEntityManager()->persist($item);
             $this->getEntityManager()->flush();
@@ -70,6 +73,55 @@ class ItemRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findByIds(array $ids): array
+    {
+        $qb = new QueryBuilder($this->getEntityManager());
+
+        return $qb->select('i')
+            ->from(Item::class, 'i')
+            ->where(
+                $qb->expr()->orX(
+                    $qb->expr()->in('i.id', $ids)
+                )
+            )
+            ->setMaxResults(count($ids))
+            ->getQuery()
+            ->getResult(AbstractQuery::HYDRATE_ARRAY);
+    }
+
+    public function findRecentlyAdded(int $count): array
+    {
+        $lastItemId = $this->findLastItem()->getId();
+
+        $ids = [];
+        for($i = $lastItemId; $i > $lastItemId - $count; $i--) {
+            $ids[] = $i;
+        }
+
+        $qb = new QueryBuilder($this->getEntityManager());
+
+        return $qb->select('i')
+            ->from(Item::class, 'i')
+            ->where(
+                $qb->expr()->orX(
+                    $qb->expr()->in('i.id', $ids)
+                )
+            )
+            ->orderBy("i.id", "DESC")
+            ->setMaxResults(count($ids))
+            ->getQuery()
+            ->getResult(AbstractQuery::HYDRATE_ARRAY);
+    }
+
+    public function findLastItem(): Item
+    {
+        return $this->createQueryBuilder('i')
+            ->orderBy('i.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()[0];
     }
 
 //    /**

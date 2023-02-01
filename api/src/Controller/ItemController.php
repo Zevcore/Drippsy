@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Item;
 use App\Enums\Categories;
 use App\Enums\State;
 use App\Repository\ItemRepository;
 use App\Repository\UserRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +32,7 @@ class ItemController extends AbstractController
             'type' => $request->get('type'),
             'thumbnails' => [],
             'owner' => $userRepository->findOneBy(['email' => $request->get("owner")]),
+            'created_at' => new \DateTimeImmutable('now'),
         ]);
 
         return $this->json([
@@ -79,7 +78,7 @@ class ItemController extends AbstractController
         ]);
     }
 
-    #[Route('/api/item/show', name: 'app_item_show', methods: ['POST'])]
+    #[Route('/api/item/show', name: 'app_item_show', methods: ['GET'])]
     public function show(Request $request, ItemRepository $itemRepository): JsonResponse
     {
         $item = $itemRepository->findOneBy(['id' => $request->get('id')]);
@@ -97,23 +96,49 @@ class ItemController extends AbstractController
         ]);
     }
 
-    #[Route('/api/item/showByIds', name: 'app_item_showByIds', methods: ['POST'])]
+    #[Route('/api/item/showByIds', name: 'app_item_showByIds', methods: ['GET'])]
     public function showByIds(Request $request, ItemRepository $itemRepository): JsonResponse
     {
-        if($request->get('amount')) {
-            //$item = $itemRepository->findOneBy(['id' => $request->get('id')]);
+        $ids = explode(",", $request->get('ids'));
 
-            dd($itemRepository->findById('1'));
+        $items = $itemRepository->findByIds($ids);
 
+        if($items) {
             return $this->json([
-                'item' => $item->getAll(),
+                'item' => $items,
                 'code' => Response::HTTP_FOUND,
             ]);
         }
 
         return $this->json([
-            'message' => 'Item do not exist!',
+            'message' => 'Items do not exist!',
             'code' => Response::HTTP_NOT_FOUND,
+        ]);
+    }
+
+    #[Route('/api/item/showRecentlyAdded', name: 'app_item_showRecentlyAdded', methods: ['GET'])]
+    public function showRecentlyAdded(Request $request, ItemRepository $itemRepository): JsonResponse
+    {
+        $count = $request->get('count');
+        if($count) {
+            $items = $itemRepository->findRecentlyAdded((int) $count);
+
+            $returnMessage = [
+                'code' => Response::HTTP_FOUND,
+            ];
+
+            foreach($items as $key => $item) {
+                $returnMessage['items'][] = [
+                    $key => $item,
+                ];
+            }
+
+            return $this->json($returnMessage);
+        }
+
+        return $this->json([
+            'message' => 'Count not provided',
+            'code' => Response::HTTP_BAD_REQUEST,
         ]);
     }
 }
