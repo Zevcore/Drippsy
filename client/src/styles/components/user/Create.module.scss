@@ -1,0 +1,66 @@
+@import '../../colors';
+
+.container {
+  width: 80%;
+  margin: 50px auto;
+
+  h1 {
+    font-size: 2rem;
+    padding: 0 0 20px 0;
+
+    &:first-letter {
+      color: $blue;
+    }
+  }
+
+  form {
+    .wrapper {
+      display: flex;
+      .element {
+        width: 50%;
+
+        &:first-child {
+          margin-right: 20px;
+        }
+      }
+    }
+
+    .element {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 10px 0;
+
+      label {
+        font-size: 1.5rem;
+        padding: 5px 0;
+      }
+
+      input, textarea, select {
+        height: 40px;
+        background-color: transparent;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 0 5px 0 $gray;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        font-size: 1.6rem;
+      }
+
+      input[type=submit] {
+        background-color: $blue;
+        color: white;
+        justify-content: center;
+      }
+
+      input[type=file] {
+        box-shadow: none;
+      }
+
+      textarea {
+        height: 200px;
+      }
+    }
+  }
+}

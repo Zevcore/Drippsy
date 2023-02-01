@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {getToken} from "@/libs/cookies";
 
 const endpoints = {
     "create": "http://localhost:8000/api/item/login",
@@ -26,3 +27,23 @@ export const getItem = async (id) => {
         throw new Error(error);
     }
 };
+
+export const createItem = async (data) => {
+    let config = {
+        headers: {
+            "X-API-TOKEN": getToken() ?? null
+        }
+    }
+
+    try {
+        const response = await axios.post(endpoints.create, data);
+        return response.data;
+    } catch (error) {
+        if(error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        }
+        throw new Error(error);
+    }
+}
