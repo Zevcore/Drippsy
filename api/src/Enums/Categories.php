@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum Categories: string {
+enum Categories: string
+{
     case MAN = "man";
     case WOMAN = "woman";
     case KIDS = "kids";

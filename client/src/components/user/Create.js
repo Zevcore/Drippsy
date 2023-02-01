@@ -22,9 +22,12 @@ export default function Create() {
         data.append('size', e.target.size.value);
         data.append('brand', e.target.brand.value);
         data.append('owner', getUser().email);
+        data.append('type', "test");
         data.append('price', e.target.price.value + " " + e.target.currency.value)
 
-        let res = createItem()
+        let res = createItem(data).then(
+            (data) => console.log(data)
+        )
     }
 
     return (
