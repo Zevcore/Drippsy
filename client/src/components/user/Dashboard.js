@@ -1,6 +1,7 @@
 import styles from "@/styles/components/user/Dashboard.module.scss"
 import {getUser} from "@/libs/cookies";
 import {useEffect, useState} from "react";
+import Link from "next/link";
 
 export default function Dashboard() {
     const [user, setUser] = useState(null);
@@ -17,7 +18,7 @@ export default function Dashboard() {
                 </div>
                 <div className={styles.actions}>
                     <ul>
-                        <li><p>Sell product</p></li>
+                        <li><Link href="/item/create">Create item</Link></li>
                         <li><p>Edit profile</p></li>
                         <li><p>Show my products</p></li>
                         <li><p>Show my orders</p></li>

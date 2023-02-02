@@ -26,6 +26,7 @@ services:
       - PHP_IDE_CONFIG=serverName=docker-server
     volumes:
       - ./api:/var/www/api
+      - ./api/docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
       - ./api/docker/php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     depends_on:
       - db

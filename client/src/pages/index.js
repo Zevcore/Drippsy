@@ -15,7 +15,6 @@ export default function Home() {
                     <Link href="/"><a>FOR KID</a></Link>
                 </div>
             </main>
-
             <Slider />
             <Sm />
             <Discover />

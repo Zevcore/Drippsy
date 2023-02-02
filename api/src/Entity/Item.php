@@ -62,6 +62,13 @@ class Item
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
 
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -249,7 +256,7 @@ class Item
         $this->setType($entity['type'] ?? $this->getType());
         $this->setThumbnails($entity['thumbnails'] ?? $this->getThumbnails());
         $this->setCreatedAt($entity['created_at'] ?? $this->getCreatedAt());
-        $this->setUpdatedAt($entity['created_at'] ?? $this->getUpdatedAt());
+        $this->setUpdatedAt($entity['updated_at'] ?? $this->getUpdatedAt());
         $this->setOwner($entity['owner'] ?? $this->getOwner());
 
         return $this;

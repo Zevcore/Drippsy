@@ -1,7 +1,8 @@
 import axios from 'axios';
+import {getToken} from "@/libs/cookies";
 
 const endpoints = {
-    "create": "http://localhost:8000/api/item/login",
+    "create": "http://localhost:8000/api/item/create",
     "update": "http://localhost:8000/api/item/update",
     "delete": "http://localhost:8000/api/item/delete",
     "show": "http://localhost:8000/api/item/show",
@@ -23,6 +24,32 @@ export const getItem = async (id) => {
         const response = await axios.get(endpoints.show + "?id=" + id);
         return response.data;
     } catch (error) {
+        if(error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        }
         throw new Error(error);
     }
 };
+
+export const createItem = async (data) => {
+    let config = {
+        headers: {
+            "X-API-TOKEN": getToken() ?? null,
+            'Content-Type': 'multipart/form-data'
+        }
+    }
+
+    try {
+        const response = await axios.post(endpoints.create, data, config);
+        return response.data;
+    } catch (error) {
+        if(error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        }
+        throw new Error(error);
+    }
+}
