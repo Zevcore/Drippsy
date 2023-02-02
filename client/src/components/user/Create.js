@@ -25,6 +25,16 @@ export default function Create() {
         data.append('type', "test");
         data.append('price', e.target.price.value + " " + e.target.currency.value)
 
+        // let files = [...e.target.thumbnails.files];
+        // for(let i = 0; i < files.length; i++) {
+        //     console.log(files);
+        // }
+        // return;
+
+        for(let file of e.target.thumbnails.files) {
+            data.append("files[]", file)
+        }
+
         let res = createItem(data).then(
             (data) => console.log(data)
         )

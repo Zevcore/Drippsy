@@ -22,21 +22,20 @@
       justify-content: center;
 
       li {
-        padding: 20px 40px;
-        background-color: $blue;
-        border-radius: 10px;
-        margin: 0 10px;
-        color: white;
-        transition: .3s ease all;
-
-        p {
+        a {
+          padding: 20px 40px;
+          background-color: $blue;
+          border-radius: 10px;
+          margin: 0 10px;
+          color: white;
+          transition: .3s ease all;
           font-size: 1.6rem;
-        }
 
-        &:hover {
-          cursor: pointer;
-          background-color: $dark-blue;
-          box-shadow: 0 0 5px 0 $gray;
+          &:hover {
+            cursor: pointer;
+            background-color: $dark-blue;
+            box-shadow: 0 0 5px 0 $gray;
+          }
         }
       }
     }

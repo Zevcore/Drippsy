@@ -24,6 +24,11 @@ export const getItem = async (id) => {
         const response = await axios.get(endpoints.show + "?id=" + id);
         return response.data;
     } catch (error) {
+        if(error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        }
         throw new Error(error);
     }
 };
@@ -31,7 +36,8 @@ export const getItem = async (id) => {
 export const createItem = async (data) => {
     let config = {
         headers: {
-            "X-API-TOKEN": getToken() ?? null
+            "X-API-TOKEN": getToken() ?? null,
+            'Content-Type': 'multipart/form-data'
         }
     }
 

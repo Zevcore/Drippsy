@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Item;
 use App\Enums\Categories;
 use App\Enums\State;
 use App\Repository\ItemRepository;
@@ -18,26 +19,42 @@ class ItemController extends AbstractController
     #[Route('/api/item/create', name: 'app_item_create', methods: ['POST'])]
     public function create(Request $request, ItemRepository $itemRepository, UserRepository $userRepository): JsonResponse
     {
-        $itemRepository->createEntity([
-            'name' => $request->get('name'),
-            'description' => $request->get("description"),
-            'price' => $request->get('price'),
-            'category' => Categories::getCategory($request->get("category")),
-            'state' => State::getState($request->get("state")),
-            'quantity' => $request->get('quantity'),
-            'visibility' => true,
-            'size' => $request->get('size'),
-            'color' => $request->get('color'),
-            'brand' => $request->get('brand'),
-            'type' => $request->get('type'),
-            'thumbnails' => [],
-            'owner' => $userRepository->findOneBy(['email' => $request->get("owner")]),
-            'created_at' => new \DateTimeImmutable('now'),
-        ]);
+        $owner = $userRepository->findOneBy(['email' => $request->get("owner")]);
+        if($owner) {
+            $date = new \DateTimeImmutable('now');
+
+            $itemRepository->createEntity([
+                'name' => $request->get('name'),
+                'description' => $request->get("description"),
+                'price' => $request->get('price'),
+                'category' => Categories::getCategory($request->get("category")),
+                'state' => State::getState($request->get("state")),
+                'quantity' => $request->get('quantity'),
+                'visibility' => true,
+                'size' => $request->get('size'),
+                'color' => $request->get('color'),
+                'brand' => $request->get('brand'),
+                'type' => $request->get('type'),
+                'thumbnails' => [],
+                'owner' => $owner,
+                'created_at' => $date,
+                'updated_at' => $date
+            ]);
+
+            $item = $itemRepository->findOneBy(['created_at' => $date]);
+            if($item) {
+                $itemRepository->updateEntity($item->getId(), $this->getItemsImageSource($request->files->get('files'), $owner->getId(), $item->getId()));
+
+                return $this->json([
+                    'message' => "Item created successfully!",
+                    'code' => Response::HTTP_CREATED
+                ]);
+            }
+        }
 
         return $this->json([
-            'message' => 'Item added successfully!',
-            'code' => Response::HTTP_CREATED
+            'message' => "User does not exist!",
+            'code' => Response::HTTP_BAD_REQUEST
         ]);
     }
 
@@ -131,5 +148,22 @@ class ItemController extends AbstractController
             'message' => 'Count not provided',
             'code' => Response::HTTP_BAD_REQUEST,
         ]);
+    }
+
+    public function getItemsImageSource(array $files, int $ownerId, int $itemId): array
+    {
+        $filePaths = [];
+        foreach($files as $file) {
+            $file->move(
+                "storage",
+                $file->getClientOriginalName()
+            );
+
+            $filePaths[] = sprintf("storage/%s/%s/%s", $ownerId, $itemId, $file->getClientOriginalName());
+        }
+
+        return  [
+            'thumbnails' => $filePaths
+        ];
     }
 }

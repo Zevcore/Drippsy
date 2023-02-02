@@ -41,7 +41,7 @@ class ItemRepository extends ServiceEntityRepository
         }
     }
 
-    public function createEntity(array $entity)
+    public function createEntity(array $entity): void
     {
         $item = new Item();
 
@@ -50,7 +50,7 @@ class ItemRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function updateEntity(string $id, array $entity): bool
+    public function updateEntity(int $id, array $entity): bool
     {
         $item = $this->findOneBy(['id' => $id]);
 

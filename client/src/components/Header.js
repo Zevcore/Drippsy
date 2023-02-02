@@ -26,7 +26,7 @@ export default function Header() {
                         {user ?
                             <div>
                                 <li><p>Logged as <span>{user.firstname} {user.lastname}</span></p></li>
-                                <li><FiSettings /></li>
+                                <li><Link href="/user"><FiSettings /></Link></li>
                             </div>
                             :
                             <div>
