@@ -1,10 +1,10 @@
-import styles from "@/styles/forms/Register.module.scss"
+import styles from "@/styles/forms/Auth.module.scss"
 import {registerUser} from "@/libs/auth/actions"
 import {useRouter} from "next/router";
 import {useEffect, useRef, useState} from "react";
 import { validateRegisterFormData } from "@/libs/auth/validators";
 
-export default function RegisterForm() {
+export default function RegisterFormComponent() {
 
     const router = useRouter();
     const [response, setResponse] = useState(null);
@@ -51,8 +51,7 @@ export default function RegisterForm() {
     return (
         <div className={styles.container}>
             <form onSubmit={handleSubmit} className="container w-50 border p-5">
-                <h1>[ register ]</h1>
-                <hr/>
+                <h1>Create an account</h1>
                 <div className={styles.element}>
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="email" />

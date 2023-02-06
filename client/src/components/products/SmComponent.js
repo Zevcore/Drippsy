@@ -5,7 +5,7 @@ import {getRecentlyAddedItems} from "@/libs/items/actions";
 import {useEffect, useState} from "react";
 import { useRouter } from 'next/router'
 
-export default function Sm() {
+export default function SmComponent() {
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(false)
     const router = useRouter();
@@ -13,7 +13,7 @@ export default function Sm() {
     useEffect(() => {
         setLoading(true)
         if(!data) {
-            getRecentlyAddedItems(2)
+            getRecentlyAddedItems(10)
                 .then((res) => {
                     setData(res)
                     setLoading(false)
@@ -36,21 +36,20 @@ export default function Sm() {
                 {data.items.map((item) => {
                     if(item.visibility) {
                         return (
-                            <div className={styles.product} key={item.id}>
+                            <div className={styles.product} key={item.id} onClick={handleClick(item.id)}>
                                 <div className={styles.thumbnail}>
-                                    <img src="https://assets.adidas.com/images/w_276,h_276,f_auto,q_auto,fl_lossy,c_fill,g_auto/b7beee7c32d4438aaba3acb6001c2e7b_9366/FY7757_01_standard.jpg" />
+                                    {
+                                        item.thumbnails[0] ?
+                                            <img src={"http://localhost:8000/" + item.thumbnails[0]}  alt="test"/>
+                                            :
+                                            <img src="https://assets.adidas.com/images/w_276,h_276,f_auto,q_auto,fl_lossy,c_fill,g_auto/b7beee7c32d4438aaba3acb6001c2e7b_9366/FY7757_01_standard.jpg" />
+                                    }
                                 </div>
-                                <p className={styles.product_title}>{item.name}</p>
-                                <p className={styles.price}>{item.price}</p>
-                                <p className={styles.name}>{item.description}</p>
-                                <div className={styles.actions}>
-                                    <Link href="/">
-                                        <a href=""><BsFillCartPlusFill /> Add to cart</a>
-                                    </Link>
-                                    <Link href="/">
-                                        <a onClick={handleClick(item.id)} href=""><BsFillEyeFill /> View more</a>
-                                    </Link>
+                                <div className={styles.wrapper}>
+                                    <p className={styles.name}>{item.name}</p>
+                                    <p className={styles.price}>{item.price}</p>
                                 </div>
+                                <p className={styles.brand}>{item.brand}</p>
                             </div>
                         )
                     }

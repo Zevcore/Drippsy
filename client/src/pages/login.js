@@ -1,12 +1,12 @@
-import LoginForm from "@/components/LoginForm"
+import LoginFormComponent from "@/components/LoginFormComponent"
 import IndexLayout from "@/layouts/IndexLayout";
 import Newsletter from "@/components/Newsletter";
-import Footer from "@/components/Footer";
+import FooterComponent from "@/components/FooterComponent";
 
 export default function Login() {
     return (
         <IndexLayout>
-            <LoginForm />
+            <LoginFormComponent />
         </IndexLayout>
     )
 }

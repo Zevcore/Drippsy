@@ -1,4 +1,4 @@
-export default function Orders() {
+export default function OrdersComponent() {
     return (
         <div>orders</div>
     )

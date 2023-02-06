@@ -1,13 +1,11 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Newsletter from "@/components/Newsletter";
+import HeaderComponent from "@/components/HeaderComponent";
+import FooterComponent from "@/components/FooterComponent";
 export default function IndexLayout({ children }) {
     return (
         <div>
-            <Header />
+            <HeaderComponent />
             {children}
-            <Newsletter />
-            <Footer />
+            <FooterComponent />
         </div>
     )
 }

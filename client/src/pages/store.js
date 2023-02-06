@@ -1,8 +1,7 @@
 import IndexLayout from "@/layouts/IndexLayout";
-import CategoriesComponent from "@/components/CategoriesComponent";
 import Single from "@/components/products/SingleComponent";
 
-export default function Home() {
+export default function Store() {
     return (
         <IndexLayout>
             <Single />

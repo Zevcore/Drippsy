@@ -1,59 +1,78 @@
-@import '../colors';
+@import '../palette';
 
 .footer {
-  width: 100%;
+  width: 90%;
+  margin: 60px auto;
 
   .links {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: $dark-gray;
+    align-items: center;
+
     ul {
-      margin: 0 50px;
-      padding: 50px 0;
       list-style: none;
       h3 {
         font-size: 2rem;
-        color: $blue;
+        font-weight: bold;
+        padding: 5px 0;
+        color: $green;
+      }
+      p {
+        font-size: 1.8rem;
       }
       li {
-        margin: 10px 0;
         a {
-          font-size: 1.8rem;
-          color: $gray;
+          font-size: 1.7rem;
         }
-
-        svg {
-          font-size: 3rem;
-          color: white;
+      }
+      .box {
+        display: flex;
+        margin: 20px 0;
+        justify-content: center;
+        li {
+          padding: 10px;
+          border-radius: 100%;
+          a {
+            svg {
+              font-size: 2rem;
+              color: $dark-gray;
+            }
+            color: $green;
+          }
         }
       }
     }
-  }
-  .cookies {
-    background-color: $dark-gray;
-    ul {
+
+    .wrapper {
+      width: 100%;
+      padding-left: 15vw;
       display: flex;
-      justify-content: center;
-      list-style: none;
-      li {
-        padding: 20px 0;
-        margin: 0 20px;
-        a {
-          color: white;
-          font-size: 1.5rem;
+      justify-content: space-between;
+
+      ul {
+        h3 {
+          color: $dark-gray;
+        }
+
+        li {
+          padding: 10px 0;
+          a {
+            color: $dark-gray;
+            transition: .2s ease all;
+            &:hover {
+              color: $green;
+            }
+          }
         }
       }
     }
   }
-
   .copyrights {
-    background-color: $darker-gray;
+    border-top: 1px solid $lighter-gray;
+    margin: 15px 0;
+    padding: 15px 0;
     text-align: center;
     p {
-      color: white;
-      padding: 10px 0;
-      font-weight: bold;
+      font-size: 1.4rem;
     }
   }
 }

@@ -1,4 +1,4 @@
-export default function Edit() {
+export default function EditComponent() {
     return (
         <div>Edit</div>
     )

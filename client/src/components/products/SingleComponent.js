@@ -2,15 +2,18 @@ import styles from "@/styles/components/products/Single.module.scss"
 import {AiFillStar} from "react-icons/ai"
 import {getItem} from "@/libs/items/actions";
 import {useEffect, useState} from "react";
+import { useRouter } from 'next/router'
 
 export default function Sm() {
+    const router = useRouter();
     const [item, setItem] = useState(null)
     const [isLoading, setLoading] = useState(false)
+    const { id } = router.query
 
     useEffect(() => {
         setLoading(true)
         if(!item) {
-            getItem(2)
+            getItem(id)
                 .then((res) => {
                     setItem(res.item)
                     setLoading(false)
@@ -27,11 +30,16 @@ export default function Sm() {
             <h3>Category</h3>
             <div className={styles.wrapper}>
                 <div className={styles.gallery}>
-                    <img src="https://bigstarshoes.pl/userdata/public/gfx/23865/20200731_0442.jpg" />
-                    <img src="https://bigstarshoes.pl/userdata/public/gfx/23865/20200731_0442.jpg" />
-                    <img src="https://bigstarshoes.pl/userdata/public/gfx/23865/20200731_0442.jpg" />
-                    <img src="https://bigstarshoes.pl/userdata/public/gfx/23865/20200731_0442.jpg" />
-                    <img src="https://bigstarshoes.pl/userdata/public/gfx/23865/20200731_0442.jpg" />
+                    {item.thumbnails.map((image) => {
+                        return (
+                            <img src={"http://localhost:8000/" + image}  alt="test"/>
+                        )
+                    })}
+                    {/*<img src="http://localhost" />*/}
+                    {/*<img src="https://bigstarshoes.pl/userdata/public/gfx/23865/20200731_0442.jpg" />*/}
+                    {/*<img src="https://bigstarshoes.pl/userdata/public/gfx/23865/20200731_0442.jpg" />*/}
+                    {/*<img src="https://bigstarshoes.pl/userdata/public/gfx/23865/20200731_0442.jpg" />*/}
+                    {/*<img src="https://bigstarshoes.pl/userdata/public/gfx/23865/20200731_0442.jpg" />*/}
                 </div>
                 <div className={styles.product}>
                     <div className={styles.title}>

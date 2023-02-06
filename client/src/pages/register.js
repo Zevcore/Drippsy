@@ -1,12 +1,12 @@
-import RegisterForm from "@/components/RegisterForm"
+import RegisterFormComponent from "@/components/RegisterFormComponent"
 import IndexLayout from "@/layouts/IndexLayout";
 import Newsletter from "@/components/Newsletter";
-import Footer from "@/components/Footer";
+import FooterComponent from "@/components/FooterComponent";
 
 export default function Register() {
     return (
         <IndexLayout>
-            <RegisterForm />
+            <RegisterFormComponent />
         </IndexLayout>
     )
 }

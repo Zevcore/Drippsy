@@ -1,10 +1,10 @@
-import styles from "@/styles/forms/Login.module.scss"
+import styles from "@/styles/forms/Auth.module.scss"
 import { loginUser } from "@/libs/auth/actions"
 import {validateLoginFormData, validateLoginFormResponse} from "@/libs/auth/validators"
 import {useEffect, useRef, useState} from "react"
 import { useRouter } from 'next/router'
 
-export default function LoginForm() {
+export default function LoginFormComponent() {
 
     const router = useRouter();
     const [response, setResponse] = useState(null);
@@ -43,8 +43,7 @@ export default function LoginForm() {
     return (
         <div className={styles.container}>
             <form onSubmit={handleSubmit}>
-                <h1>[ login ]</h1>
-                <hr/>
+                <h1>Sign in</h1>
                 <div className={styles.element}>
                     <label htmlFor="email">Email address</label>
                     <input type="email" id="email"/>

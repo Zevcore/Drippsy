@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {getUser} from "@/libs/cookies";
 import {createItem} from "@/libs/items/actions";
 
-export default function Create() {
+export default function CreateComponent() {
 
     const sizes = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
                     30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
@@ -47,7 +47,7 @@ export default function Create() {
             <form encType="multipart/form-data" onSubmit={handleSubmit}>
                 <div className={styles.element}>
                     <label htmlFor="name">Name</label>
-                    <input type="text" id="name"/>
+                    <input type="text" id="name" placeholder="eg. Nike Vapor X"/>
                 </div>
                 <div className={styles.element}>
                     <label htmlFor="description">Description</label>
@@ -56,7 +56,7 @@ export default function Create() {
                 <div className={styles.wrapper}>
                     <div className={styles.element}>
                         <label htmlFor="price">Price</label>
-                        <input type="text" id="price"/>
+                        <input type="text" id="price" placeholder="eg. 19,99"/>
                     </div>
                     <div className={styles.element}>
                         <label htmlFor="currency">Currency</label>
@@ -85,7 +85,7 @@ export default function Create() {
                     </div>
                     <div className={styles.element}>
                         <label htmlFor="number">Quantity</label>
-                        <input type="number" id="quantity"/>
+                        <input type="number" id="quantity" placeholder="eg. 21"/>
                     </div>
                 </div>
                 <div className={styles.element}>
@@ -101,7 +101,7 @@ export default function Create() {
                     </div>
                     <div className={styles.element}>
                         <label htmlFor="color">Color</label>
-                        <input type="text" id="color"/>
+                        <input type="text" id="color" placeholder="eg. red"/>
                     </div>
                     <div className={styles.element}>
                         <label htmlFor="brand">Brand</label>

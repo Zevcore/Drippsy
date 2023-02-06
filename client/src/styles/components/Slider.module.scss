@@ -1,60 +1,118 @@
-@import '../colors';
+@import '../palette';
 
 div.container {
-  h1.title {
-    padding: 20px 0;
-    font-size: 3rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
-    position: relative;
-    width: 300px;
-    margin: 0 auto;
-    z-index: -1;
+  width: 90%;
+  margin: 60px auto;
+  position: relative;
 
-    &::before {
-      content: '';
-      position: absolute;
-      bottom: 20px;
-      right: 40px;
-      width: 50px;
-      height: 5px;
-      background-color: $blue;
-      border-radius: 5px;
-      z-index: -1;
+  .heading {
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: $dark-gray;
     }
 
-    &:first-letter {
-      color: $blue;
+    a {
+      display: flex;
+      align-items: center;
+
+      color: $green;
+      font-size: 1.5rem;
+
+      svg {
+        margin-left: 10px;
+      }
     }
   }
-  .carousel {
-    z-index: -1;
-    cursor: grab;
-    overflow: hidden;
-    .inner_carousel {
-      z-index: -1;
-      display: flex;
-      .item {
-        padding: 40px;
-        pointer-events: none;
-        width: 100%;
 
-        a {
-          display: block;
-          img {
-            width: 350px;
-            height: 400px;
-            margin: 0 20px;
+  .slider {
+    margin: 30px 0;
+    width: 100%;
+    border: 1px solid $lighter-gray;
+    padding: 20px 0;
+    border-radius: 5px;
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .thumbnail {
+        width: 50%;
+        img {
+          width: 100%;
+          min-height: 400px;
+          max-height: 400px;
+          border-radius: 5px;
+        }
+
+        padding: 0 50px;
+        border-right: 1px solid $lighter-gray;
+      }
+
+      .data {
+        width: 50%;
+        margin-left: 50px;
+
+        p.name {
+          display: flex;
+          align-items: center;
+
+          svg {
+            margin-left: 20px;
+            color: $white;
+            background-color: $green;
+            font-size: 3rem;
+            padding: 2px 0;
+            border-radius: 5px;
           }
-          p {
-            text-align: center;
-            color: $dark-gray;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 1.5rem;
+
+          span {
+            font-weight: bold;
+            font-size: 2rem;
           }
         }
+
+        p.price {
+          font-weight: lighter;
+          font-size: 1.8rem;
+        }
+
+        p.size, p.state, p.created_at {
+          font-size: 1.6rem;
+          span {
+            font-weight: bold;
+            font-size: 1.6rem;
+          }
+        }
+      }
+    }
+  }
+
+  .buttons {
+    button {
+      position: absolute;
+      top: 50%;
+
+      display: flex;
+      border: none;
+      background-color: transparent;
+
+      svg {
+        font-size: 3rem;
+        margin: 0 10px;
+        transition: .2s ease all;
+        &:hover {
+          transform: scale(1.1);
+          cursor: pointer;
+        }
+      }
+
+      &:last-child {
+        right: 0;
       }
     }
   }

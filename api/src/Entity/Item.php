@@ -143,7 +143,6 @@ class Item
     }
 
 
-
     public function getQuantity(): ?string
     {
         return $this->quantity;
@@ -242,7 +241,6 @@ class Item
 
     public function setAll(array $entity): Item
     {
-
         $this->setName( $entity['name'] ?? $this->getName());
         $this->setDescription($entity['description'] ?? $this->getDescription());
         $this->setPrice($entity['price'] ?? $this->getPrice());

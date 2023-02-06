@@ -140,6 +140,7 @@ class AuthController extends AbstractController
     protected function prepareUserDataToResponse(User $user): array
     {
         return [
+            "id" => $user->getId(),
             "email" => $user->getEmail(),
             "firstname" => $user->getFirstname(),
             "lastname" => $user->getLastname(),
