@@ -155,7 +155,7 @@ class ItemController extends AbstractController
         $filePaths = [];
         foreach($files as $file) {
             $file->move(
-                "storage",
+                sprintf("storage/%s/%s/", $ownerId, $itemId),
                 $file->getClientOriginalName()
             );
 

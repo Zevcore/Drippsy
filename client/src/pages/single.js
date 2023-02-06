@@ -1,6 +1,6 @@
 import IndexLayout from "@/layouts/IndexLayout";
-import Discover from "@/components/Discover";
-import Single from "@/components/products/Single";
+import CategoriesComponent from "@/components/CategoriesComponent";
+import Single from "@/components/products/SingleComponent";
 
 export default function Home() {
     return (
